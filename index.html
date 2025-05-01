@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duo des Reines</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary: #8A1C18;
+            --secondary: #D7BE91;
+            --dark: #10183A;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .bg-dark {
+            background-color: var(--dark);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .text-secondary {
+            color: var(--secondary);
+        }
+        
+        .text-dark {
+            color: var(--dark);
+        }
+        
+        .border-primary {
+            border-color: var(--primary);
+        }
+        
+        .border-secondary {
+            border-color: var(--secondary);
+        }
+        
+        .border-dark {
+            border-color: var(--dark);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(16, 24, 58, 0.7), rgba(16, 24, 58, 0.7)), url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .carousel-item {
+            transition: transform 0.5s ease;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover .team-overlay {
+            opacity: 1;
+        }
+        
+        .team-overlay {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Social Icons Fixed -->
+    <div class="fixed bottom-6 left-6 z-50 flex flex-col space-y-4">
+        <a href="#" class="social-icon bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700">
+            <i class="fab fa-whatsapp text-xl"></i>
+        </a>
+        <a href="#" class="social-icon bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full shadow-lg hover:from-purple-600 hover:to-pink-600">
+            <i class="fab fa-instagram text-xl"></i>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-dark text-white shadow-lg sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="title-font text-2xl font-bold text-secondary">Duo des Reines</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('home')">Accueil</a>
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('services')">Services</a>
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('gallery')">Galerie</a>
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('contact')">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="outline-none mobile-menu-button">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="hidden mobile-menu bg-dark">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('home')">Accueil</a>
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('services')">Services</a>
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('gallery')">Galerie</a>
+                    <a href="#" class="nav-link py-2 px-1" onclick="showPage('contact')">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pages -->
+    <div class="pages-container">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Section -->
+            <section class="hero min-h-screen flex items-center justify-center text-white fade-in">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="title-font text-5xl md:text-7xl font-bold mb-6 slide-up">Duo des Reines</h1>
+                    <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto slide-up">L'excellence au service de votre beauté</p>
+                    <button onclick="showPage('services')" class="bg-secondary text-dark font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300 transform hover:scale-105 pulse">
+                        Découvrir nos services
+                    </button>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 slide-up">
+                            <h2 class="title-font text-4xl font-bold text-dark mb-6">Notre Histoire</h2>
+                            <p class="text-gray-700 mb-4">Fondé en 2015, Duo des Reines est né de la passion commune de deux amies pour l'esthétique et le bien-être.</p>
+                            <p class="text-gray-700 mb-6">Notre mission est de vous offrir des services de qualité dans une atmosphère chaleureuse et relaxante, où chaque client est traité comme une reine.</p>
+                            <button onclick="showPage('contact')" class="bg-primary text-white font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition duration-300">
+                                Prendre rendez-vous
+                            </button>
+                        </div>
+                        <div class="md:w-1/2 relative slide-up">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Salon de beauté" class="rounded-lg shadow-xl w-full h-auto">
+                                <div class="absolute -bottom-6 -right-6 bg-secondary p-4 rounded-lg shadow-lg hidden md:block">
+                                    <p class="text-dark font-bold">10 ans d'expérience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Preview Section -->
+            <section class="py-20 bg-gray-100">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 slide-up">
+                        <h2 class="title-font text-4xl font-bold text-dark mb-4">Nos Services</h2>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-700 max-w-2xl mx-auto">Découvrez notre gamme complète de services de beauté et de bien-être</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl transition duration-300 slide-up">
+                            <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-spa text-3xl text-primary"></i>
+                            </div>
+                            <h3 class="title-font text-xl font-bold text-dark mb-3">Soins du Visage</h3>
+                            <p class="text-gray-700 mb-4">Des soins personnalisés pour une peau éclatante et rajeunie.</p>
+                            <button onclick="showPage('services')" class="text-primary font-semibold hover:underline">En savoir plus</button>
+                        </div>
+                        
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl transition duration-300 slide-up">
+                            <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-cut text-3xl text-primary"></i>
+                            </div>
+                            <h3 class="title-font text-xl font-bold text-dark mb-3">Coiffure</h3>
+                            <p class="text-gray-700 mb-4">Coupes, colorations et brushing pour sublimer votre chevelure.</p>
+                            <button onclick="showPage('services')" class="text-primary font-semibold hover:underline">En savoir plus</button>
+                        </div>
+                        
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl transition duration-300 slide-up">
+                            <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-hand-sparkles text-3xl text-primary"></i>
+                            </div>
+                            <h3 class="title-font text-xl font-bold text-dark mb-3">Onglerie</h3>
+                            <p class="text-gray-700 mb-4">Pose de vernis, french manucure et extensions pour des mains parfaites.</p>
+                            <button onclick="showPage('services')" class="text-primary font-semibold hover:underline">En savoir plus</button>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12 slide-up">
+                        <button onclick="showPage('services')" class="bg-dark text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300">
+                            Voir tous nos services
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Preview Section -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 slide-up">
+                        <h2 class="title-font text-4xl font-bold text-dark mb-4">Notre Galerie</h2>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-700 max-w-2xl mx-auto">Quelques-unes de nos réalisations</p>
+                    </div>
+                    
+                    <div class="carousel relative overflow-hidden rounded-lg shadow-xl slide-up">
+                        <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
+                            <div class="carousel-item w-full flex-shrink-0">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Beauté" class="w-full h-64 object-cover rounded">
+                                    <img src="https://images.unsplash.com/photo-1596703262835-4c3260ec0b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Beauté" class="w-full h-64 object-cover rounded">
+                                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Beauté" class="w-full h-64 object-cover rounded">
+                                </div>
+                            </div>
+                            <div class="carousel-item w-full flex-shrink-0">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <img src="https://images.unsplash.com/photo-1556228578-8c2d4a4f4473?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Beauté" class="w-full h-64 object-cover rounded">
+                                    <img src="https://images.unsplash.com/photo-1562322140-8baeececfcee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Beauté" class="w-full h-64 object-cover rounded">
+                                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Beauté" class="w-full h-64 object-cover rounded">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 text-dark p-2 rounded-full shadow-md hover:bg-opacity-100">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 text-dark p-2 rounded-full shadow-md hover:bg-opacity-100">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="text-center mt-12 slide-up">
+                        <button onclick="showPage('gallery')" class="bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300">
+                            Voir toute la galerie
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section class="py-20 bg-gray-100">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 slide-up">
+                        <h2 class="title-font text-4xl font-bold text-dark mb-4">Notre Équipe</h2>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-700 max-w-2xl mx-auto">Rencontrez nos professionnelles dévouées à votre beauté</p>
+                    </div>
+                    
+                    <div class="carousel relative overflow-hidden rounded-lg slide-up">
+                        <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
+                            <div class="carousel-item w-full flex-shrink-0">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div class="team-card bg-white rounded-lg overflow-hidden shadow-md relative">
+                                        <img src="./img/pexels-ilkinefendiyev-20718223.jpg" alt="Sophie" class="w-full h-96 object-cover">
+                                        <div class="team-overlay absolute inset-0 bg-dark bg-opacity-70 flex flex-col justify-center items-center p-6 text-center text-white">
+                                            <h3 class="title-font text-2xl font-bold mb-2">Sophie</h3>
+                                            <p class="text-secondary mb-4">Esthéticienne Diplômée</p>
+                                            <p class="mb-4">Spécialiste en soins du visage et épilation depuis 8 ans.</p>
+                                            <div class="flex space-x-4">
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-instagram"></i></a>
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-facebook"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="team-card bg-white rounded-lg overflow-hidden shadow-md relative">
+                                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Clara" class="w-full h-96 object-cover">
+                                        <div class="team-overlay absolute inset-0 bg-dark bg-opacity-70 flex flex-col justify-center items-center p-6 text-center text-white">
+                                            <h3 class="title-font text-2xl font-bold mb-2">Clara</h3>
+                                            <p class="text-secondary mb-4">Coiffeuse Coloriste</p>
+                                            <p class="mb-4">Expert en colorations et coupes techniques depuis 10 ans.</p>
+                                            <div class="flex space-x-4">
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-instagram"></i></a>
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-facebook"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item w-full flex-shrink-0">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    <div class="team-card bg-white rounded-lg overflow-hidden shadow-md relative">
+                                        <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80" alt="Léa" class="w-full h-96 object-cover">
+                                        <div class="team-overlay absolute inset-0 bg-dark bg-opacity-70 flex flex-col justify-center items-center p-6 text-center text-white">
+                                            <h3 class="title-font text-2xl font-bold mb-2">Léa</h3>
+                                            <p class="text-secondary mb-4">Prothésiste Ongulaire</p>
+                                            <p class="mb-4">Spécialiste en pose d'ongles et nail art depuis 6 ans.</p>
+                                            <div class="flex space-x-4">
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-instagram"></i></a>
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-facebook"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="team-card bg-white rounded-lg overflow-hidden shadow-md relative">
+                                        <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Emma" class="w-full h-96 object-cover">
+                                        <div class="team-overlay absolute inset-0 bg-dark bg-opacity-70 flex flex-col justify-center items-center p-6 text-center text-white">
+                                            <h3 class="title-font text-2xl font-bold mb-2">Emma</h3>
+                                            <p class="text-secondary mb-4">Maquilleuse Professionnelle</p>
+                                            <p class="mb-4">Artiste du maquillage pour tous vos événements spéciaux.</p>
+                                            <div class="flex space-x-4">
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-instagram"></i></a>
+                                                <a href="#" class="text-secondary hover:text-white"><i class="fab fa-facebook"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="team-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 text-dark p-2 rounded-full shadow-md hover:bg-opacity-100">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="team-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 text-dark p-2 rounded-full shadow-md hover:bg-opacity-100">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Preview Section -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 slide-up">
+                            <h2 class="title-font text-4xl font-bold text-dark mb-6">Nous Contacter</h2>
+                            <div class="w-24 h-1 bg-primary mb-6"></div>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                        <i class="fas fa-map-marker-alt text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-dark mb-1">Adresse</h3>
+                                        <p class="text-gray-700">123 Avenue des Reines, 75000 Paris</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                        <i class="fas fa-phone-alt text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-dark mb-1">Téléphone</h3>
+                                        <p class="text-gray-700">01 23 45 67 89</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                        <i class="fas fa-envelope text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-dark mb-1">Email</h3>
+                                        <p class="text-gray-700">contact@duodesreines.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                        <i class="fas fa-clock text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-dark mb-1">Horaires</h3>
+                                        <p class="text-gray-700">Lundi - Samedi: 9h - 19h</p>
+                                        <p class="text-gray-700">Dimanche: Fermé</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 slide-up">
+                            <div class="bg-gray-100 p-8 rounded-lg shadow-md">
+                                <h3 class="title-font text-2xl font-bold text-dark mb-6">Prendre rendez-vous</h3>
+                                <form>
+                                    <div class="mb-4">
+                                        <input type="text" placeholder="Votre nom" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                    </div>
+                                    <div class="mb-4">
+                                        <input type="email" placeholder="Votre email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                    </div>
+                                    <div class="mb-4">
+                                        <input type="tel" placeholder="Votre téléphone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                    </div>
+                                    <div class="mb-4">
+                                        <select class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                            <option value="">Service demandé</option>
+                                            <option value="soins">Soins du visage</option>
+                                            <option value="coiffure">Coiffure</option>
+                                            <option value="onglerie">Onglerie</option>
+                                            <option value="maquillage">Maquillage</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <textarea placeholder="Votre message" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary" rows="4"></textarea>
+                                    </div>
+                                    <button type="submit" class="w-full bg-primary text-white font-bold py-2 px-4 rounded hover:bg-opacity-90 transition duration-300">
+                                        Envoyer
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Services Page -->
+        <div id="services-page" class="page">
+            <section class="py-20 bg-gray-100">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h1 class="title-font text-5xl font-bold text-dark mb-4">Nos Services</h1>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-700 max-w-2xl mx-auto">Découvrez notre gamme complète de services de beauté et de bien-être</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Service 1 -->
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <div class="flex items-start mb-6">
+                                <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                                    <i class="fas fa-spa text-2xl text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="title-font text-2xl font-bold text-dark mb-2">Soins du Visage</h2>
+                                    <p class="text-gray-700">Des soins personnalisés adaptés à chaque type de peau</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Nettoyage de peau</span>
+                                    <span class="text-primary font-bold">60€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Soin hydratant intense</span>
+                                    <span class="text-primary font-bold">75€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Soin anti-âge</span>
+                                    <span class="text-primary font-bold">90€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Soin éclat</span>
+                                    <span class="text-primary font-bold">70€</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 2 -->
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <div class="flex items-start mb-6">
+                                <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                                    <i class="fas fa-cut text-2xl text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="title-font text-2xl font-bold text-dark mb-2">Coiffure</h2>
+                                    <p class="text-gray-700">Coupes, colorations et brushing pour sublimer votre chevelure</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Coupe femme</span>
+                                    <span class="text-primary font-bold">45€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Coloration complète</span>
+                                    <span class="text-primary font-bold">65€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Balayage</span>
+                                    <span class="text-primary font-bold">85€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Brushing</span>
+                                    <span class="text-primary font-bold">35€</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 3 -->
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <div class="flex items-start mb-6">
+                                <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                                    <i class="fas fa-hand-sparkles text-2xl text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="title-font text-2xl font-bold text-dark mb-2">Onglerie</h2>
+                                    <p class="text-gray-700">Pose de vernis, french manucure et extensions pour des mains parfaites</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Manucure simple</span>
+                                    <span class="text-primary font-bold">30€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">French manucure</span>
+                                    <span class="text-primary font-bold">40€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Pose de vernis semi-permanent</span>
+                                    <span class="text-primary font-bold">45€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Extensions en gel</span>
+                                    <span class="text-primary font-bold">65€</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 4 -->
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <div class="flex items-start mb-6">
+                                <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                                    <i class="fas fa-paint-brush text-2xl text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="title-font text-2xl font-bold text-dark mb-2">Maquillage</h2>
+                                    <p class="text-gray-700">Maquillage professionnel pour toutes occasions</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Maquillage jour</span>
+                                    <span class="text-primary font-bold">40€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Maquillage soirée</span>
+                                    <span class="text-primary font-bold">55€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Maquillage mariée</span>
+                                    <span class="text-primary font-bold">90€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Cours de maquillage</span>
+                                    <span class="text-primary font-bold">70€</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 5 -->
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <div class="flex items-start mb-6">
+                                <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                                    <i class="fas fa-spa text-2xl text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="title-font text-2xl font-bold text-dark mb-2">Épilation</h2>
+                                    <p class="text-gray-700">Techniques douces et efficaces pour une peau parfaitement lisse</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Épilation sourcils</span>
+                                    <span class="text-primary font-bold">15€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Épilation lèvre</span>
+                                    <span class="text-primary font-bold">10€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Épilation maillot</span>
+                                    <span class="text-primary font-bold">30€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Épilation jambes</span>
+                                    <span class="text-primary font-bold">45€</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 6 -->
+                        <div class="service-card bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <div class="flex items-start mb-6">
+                                <div class="bg-secondary bg-opacity-20 p-4 rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                                    <i class="fas fa-gem text-2xl text-primary"></i>
+                                </div>
+                                <div>
+                                    <h2 class="title-font text-2xl font-bold text-dark mb-2">Forfaits</h2>
+                                    <p class="text-gray-700">Combinaisons de services pour un moment de détente complet</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Détente express</span>
+                                    <span class="text-primary font-bold">90€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Journée bien-être</span>
+                                    <span class="text-primary font-bold">180€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Préparation mariée</span>
+                                    <span class="text-primary font-bold">220€</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <span class="font-medium">Soin complet</span>
+                                    <span class="text-primary font-bold">150€</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-16">
+                        <button onclick="showPage('contact')" class="bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition duration-300">
+                            Prendre rendez-vous
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Gallery Page -->
+        <div id="gallery-page" class="page">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h1 class="title-font text-5xl font-bold text-dark mb-4">Notre Galerie</h1>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-700 max-w-2xl mx-auto">Quelques-unes de nos réalisations</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1596703262835-4c3260ec0b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1556228578-8c2d4a4f4473?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececfcee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a05d5ae0df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Beauté" class="w-full h-64 object-cover transform hover:scale-105 transition duration-500">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact-page" class="page">
+            <section class="py-20 bg-gray-100">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h1 class="title-font text-5xl font-bold text-dark mb-4">Nous Contacter</h1>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-700 max-w-2xl mx-auto">Prenez rendez-vous ou posez-nous vos questions</p>
+                    </div>
+                    
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div class="lg:w-1/2">
+                            <div class="bg-white p-8 rounded-lg shadow-md">
+                                <h2 class="title-font text-3xl font-bold text-dark mb-6">Informations de contact</h2>
+                                
+                                <div class="space-y-6">
+                                    <div class="flex items-start">
+                                        <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                            <i class="fas fa-map-marker-alt text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-dark mb-1">Adresse</h3>
+                                            <p class="text-gray-700">123 Avenue des Reines, 75000 Paris</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                            <i class="fas fa-phone-alt text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-dark mb-1">Téléphone</h3>
+                                            <p class="text-gray-700">01 23 45 67 89</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                            <i class="fas fa-envelope text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-dark mb-1">Email</h3>
+                                            <p class="text-gray-700">contact@duodesreines.com</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                            <i class="fas fa-clock text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-dark mb-1">Horaires</h3>
+                                            <p class="text-gray-700">Lundi - Samedi: 9h - 19h</p>
+                                            <p class="text-gray-700">Dimanche: Fermé</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="bg-secondary bg-opacity-20 p-3 rounded-full mr-4">
+                                            <i class="fas fa-share-alt text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-dark mb-1">Réseaux sociaux</h3>
+                                            <div class="flex space-x-4 mt-2">
+                                                <a href="#" class="social-icon bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                                <a href="#" class="social-icon bg-gradient-to-r from-purple-500 to-pink-500 text-white p-2 rounded-full hover:from-purple-600 hover:to-pink-600">
+                                                    <i class="fab fa-instagram"></i>
+                                                </a>
+                                                <a href="#" class="social-icon bg-green-600 text-white p-2 rounded-full hover:bg-green-700">
+                                                    <i class="fab fa-whatsapp"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:w-1/2">
+                            <div class="bg-white p-8 rounded-lg shadow-md">
+                                <h2 class="title-font text-3xl font-bold text-dark mb-6">Prendre rendez-vous</h2>
+                                <form>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label for="name" class="block text-gray-700 font-medium mb-1">Nom complet</label>
+                                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                        </div>
+                                        <div>
+                                            <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+                                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label for="phone" class="block text-gray-700 font-medium mb-1">Téléphone</label>
+                                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                        </div>
+                                        <div>
+                                            <label for="service" class="block text-gray-700 font-medium mb-1">Service</label>
+                                            <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                                <option value="">Choisir un service</option>
+                                                <option value="soins">Soins du visage</option>
+                                                <option value="coiffure">Coiffure</option>
+                                                <option value="onglerie">Onglerie</option>
+                                                <option value="maquillage">Maquillage</option>
+                                                <option value="epilation">Épilation</option>
+                                                <option value="forfaits">Forfaits</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="date" class="block text-gray-700 font-medium mb-1">Date souhaitée</label>
+                                        <input type="date" id="date" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="message" class="block text-gray-700 font-medium mb-1">Message</label>
+                                        <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary"></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-4 rounded hover:bg-opacity-90 transition duration-300">
+                                        Envoyer la demande
+                                    </button>
+                                </form>
+                            </div>
+                            
+                            <div class="mt-8 bg-white p-4 rounded-lg shadow-md">
+                                <h3 class="title-font text-xl font-bold text-dark mb-4">Nous trouver</h3>
+                                <div class="h-64 w-full bg-gray-200 rounded-lg overflow-hidden">
+                                    <!-- Google Maps Embed -->
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.99144060817!2d2.292292615674389!3d48.85837360866186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1623256789044!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="title-font text-2xl font-bold text-secondary mb-4">Duo des Reines</h3>
+                    <p class="max-w-xs">L'excellence au service de votre beauté depuis 2015.</p>
+                </div>
+                
+                <div class="mb-8 md:mb-0">
+                    <h4 class="title-font text-lg font-bold mb-4">Liens rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-secondary transition duration-300" onclick="showPage('home')">Accueil</a></li>
+                        <li><a href="#" class="hover:text-secondary transition duration-300" onclick="showPage('services')">Services</a></li>
+                        <li><a href="#" class="hover:text-secondary transition duration-300" onclick="showPage('gallery')">Galerie</a></li>
+                        <li><a href="#" class="hover:text-secondary transition duration-300" onclick="showPage('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="mb-8 md:mb-0">
+                    <h4 class="title-font text-lg font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-secondary transition duration-300">Soins du visage</a></li>
+                        <li><a href="#" class="hover:text-secondary transition duration-300">Coiffure</a></li>
+                        <li><a href="#" class="hover:text-secondary transition duration-300">Onglerie</a></li>
+                        <li><a href="#" class="hover:text-secondary transition duration-300">Maquillage</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="title-font text-lg font-bold mb-4">Contact</h4>
+                    <address class="not-italic">
+                        <p class="mb-2">123 Avenue des Reines</p>
+                        <p class="mb-2">75000 Paris</p>
+                        <p class="mb-2">01 23 45 67 89</p>
+                        <p class="mb-4">contact@duodesreines.com</p>
+                    </address>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gradient-to-r from-purple-500 to-pink-500 text-white p-2 rounded-full hover:from-purple-600 hover:to-pink-600">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-green-600 text-white p-2 rounded-full hover:bg-green-700">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 Duo des Reines. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(`${pageId}-page`).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active-nav');
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close mobile menu if open
+            mobileMenu.classList.add('hidden');
+        }
+        
+        // Carousel functionality
+        let currentCarouselIndex = 0;
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const carouselPrev = document.querySelector('.carousel-prev');
+        const carouselNext = document.querySelector('.carousel-next');
+        
+        if (carouselItems.length > 0) {
+            function updateCarousel() {
+                const carouselInner = document.querySelector('.carousel-inner');
+                carouselInner.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+            }
+            
+            carouselPrev.addEventListener('click', () => {
+                currentCarouselIndex = (currentCarouselIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+            });
+            
+            carouselNext.addEventListener('click', () => {
+                currentCarouselIndex = (currentCarouselIndex + 1) % carouselItems.length;
+                updateCarousel();
+            });
+        }
+        
+        // Team carousel
+        let currentTeamIndex = 0;
+        const teamItems = document.querySelectorAll('.carousel-item');
+        const teamPrev = document.querySelector('.team-prev');
+        const teamNext = document.querySelector('.team-next');
+        
+        if (teamItems.length > 0) {
+            function updateTeamCarousel() {
+                const teamInner = document.querySelector('.carousel-inner');
+                teamInner.style.transform = `translateX(-${currentTeamIndex * 100}%)`;
+            }
+            
+            teamPrev.addEventListener('click', () => {
+                currentTeamIndex = (currentTeamIndex - 1 + teamItems.length) % teamItems.length;
+                updateTeamCarousel();
+            });
+            
+            teamNext.addEventListener('click', () => {
+                currentTeamIndex = (currentTeamIndex + 1) % teamItems.length;
+                updateTeamCarousel();
+            });
+        }
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.slide-up');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
